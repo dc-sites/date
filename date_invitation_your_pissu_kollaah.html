@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date With Your Pissu Kollaah ❤️</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome 6.5.1 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        rose: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            200: '#fecdd3',
+                            300: '#fda4af',
+                            400: '#fb7185',
+                            500: '#f43f5e',
+                            600: '#e11d48',
+                            700: '#be123c',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #ffffff;
+            color: #1e293b;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Soft romantic elevation shadow */
+        .soft-card {
+            background: #ffffff;
+            box-shadow: 0 12px 36px -4px rgba(244, 63, 94, 0.09), 0 4px 12px -2px rgba(15, 23, 42, 0.03);
+            border: 1px solid rgba(254, 205, 211, 0.55);
+        }
+
+        /* Slide transition states */
+        .slide-panel {
+            display: none;
+            opacity: 0;
+            transform: translateY(14px) scale(0.985);
+            transition: opacity 0.42s cubic-bezier(0.16, 1, 0.3, 1), transform 0.42s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .slide-panel.active {
+            display: flex;
+        }
+
+        .slide-panel.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Speech bubble entrance */
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.88) translateY(10px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .animate-pop-1 {
+            animation: popIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .animate-pop-2 {
+            opacity: 0;
+            animation: popIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.45s forwards;
+        }
+
+        /* Heartbeat pulse */
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            18% { transform: scale(1.24); }
+            32% { transform: scale(0.96); }
+            48% { transform: scale(1.16); }
+        }
+
+        .heart-pulse {
+            display: inline-block;
+            animation: heartBeat 1.8s infinite ease-in-out;
+        }
+
+        /* Typing dots animation */
+        @keyframes typingBounce {
+            0%, 80%, 100% { transform: translateY(0); opacity: 0.45; }
+            40% { transform: translateY(-4px); opacity: 1; }
+        }
+        .dot-1 { animation: typingBounce 1.2s infinite 0.0s; }
+        .dot-2 { animation: typingBounce 1.2s infinite 0.2s; }
+        .dot-3 { animation: typingBounce 1.2s infinite 0.4s; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between bg-white text-slate-800 selection:bg-rose-100 selection:text-rose-700">
+
+    <!-- Minimalist Top Header & Progress Indicator -->
+    <header class="w-full bg-white/95 backdrop-blur-md sticky top-0 z-30 border-b border-rose-100/80">
+        <div class="max-w-md mx-auto px-5 py-3.5 flex items-center justify-between">
+            <!-- Left Back Button (Hidden on Slide 1) -->
+            <div class="w-10">
+                <button id="headerBackBtn" onclick="prevSlide()" aria-label="Go Back"
+                    class="hidden w-9 h-9 rounded-full bg-rose-50 hover:bg-rose-100 active:scale-95 text-rose-600 flex items-center justify-center transition-all">
+                    <i class="fa-solid fa-arrow-left text-sm"></i>
+                </button>
+            </div>
+
+            <!-- Center Step Indicator -->
+            <div class="flex flex-col items-center">
+                <div class="flex items-center gap-1.5 text-xs font-bold tracking-wider uppercase text-rose-500 mb-1.5">
+                    <i class="fa-solid fa-heart text-[11px] heart-pulse"></i>
+                    <span id="stepLabel">Step 1 of 4</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                    <span id="dot-1" class="h-1.5 w-7 rounded-full bg-rose-500 transition-all duration-300"></span>
+                    <span id="dot-2" class="h-1.5 w-7 rounded-full bg-rose-100 transition-all duration-300"></span>
+                    <span id="dot-3" class="h-1.5 w-7 rounded-full bg-rose-100 transition-all duration-300"></span>
+                    <span id="dot-4" class="h-1.5 w-7 rounded-full bg-rose-100 transition-all duration-300"></span>
+                </div>
+            </div>
+
+            <!-- Right Mini Status -->
+            <div class="w-10 flex justify-end">
+                <span class="w-9 h-9 rounded-full bg-rose-50 text-rose-500 flex items-center justify-center text-sm shadow-xs">
+                    <i class="fa-solid fa-sparkles"></i>
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Slide Container -->
+    <main class="flex-1 w-full max-w-md mx-auto px-4 py-6 flex flex-col justify-center">
+
+        <!-- ==================== SLIDE 1: DIALOGUE & AVATAR INTRO ==================== -->
+        <section id="slide-1" class="slide-panel active visible flex-col gap-6">
+            <div class="text-center space-y-1">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 text-rose-600 text-xs font-semibold">
+                    <i class="fa-solid fa-comment-dots"></i> New Message
+                </span>
+                <h1 class="text-2xl font-extrabold text-slate-900 tracking-tight">A Little Question For You</h1>
+                <p class="text-sm text-slate-500">Tap your reply bubble below to continue</p>
+            </div>
+
+            <!-- Chat Dialogue Card -->
+            <div class="soft-card rounded-3xl p-5 sm:p-6 space-y-6 bg-white">
+                <!-- Sender Bubble (Left Aligned) -->
+                <div class="flex items-end gap-3 animate-pop-1">
+                    <div class="relative shrink-0">
+                        <img src="https://i.postimg.cc/8z850QWC/AIRetouch-20261118-160545159.png"
+                             onerror="this.src='https://placehold.co/120x120/ffe4e6/e11d48?text=Him'"
+                             alt="Pissu Kolla Avatar"
+                             class="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover ring-3 ring-rose-100 shadow-md bg-rose-50">
+                        <span class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-400 border-2 border-white rounded-full"></span>
+                    </div>
+
+                    <div class="flex flex-col items-start max-w-[75%]">
+                        <span class="text-[11px] font-semibold text-slate-400 ml-1 mb-1">Pissu Kolla</span>
+                        <div class="bg-rose-50 border border-rose-100 text-slate-800 px-5 py-3.5 rounded-2xl rounded-bl-sm shadow-xs">
+                            <p class="text-lg sm:text-xl font-bold text-rose-600 flex items-center gap-2">
+                                Hii <i class="fa-solid fa-heart text-rose-500 heart-pulse text-base"></i>
+                            </p>
+                            <p class="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">
+                                Let's plan a sweet little date together next week! Are you ready?
+                            </p>
+                        </div>
+                        <span class="text-[10px] text-slate-400 mt-1 ml-1">Just now <i class="fa-solid fa-check-double text-rose-400 ml-0.5"></i></span>
+                    </div>
+                </div>
+
+                <!-- Subtle Divider -->
+                <div class="flex items-center justify-center gap-2 text-[11px] text-slate-400 font-medium">
+                    <span class="h-px flex-1 bg-slate-100"></span>
+                    <span class="flex items-center gap-1 px-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-rose-300 dot-1"></span>
+                        <span class="w-1.5 h-1.5 rounded-full bg-rose-300 dot-2"></span>
+                        <span class="w-1.5 h-1.5 rounded-full bg-rose-300 dot-3"></span>
+                    </span>
+                    <span class="h-px flex-1 bg-slate-100"></span>
+                </div>
+
+                <!-- Receiver / User Reply Section (Right Aligned) -->
+                <div class="flex items-end justify-end gap-3 animate-pop-2">
+                    <div class="flex flex-col items-end max-w-[78%]">
+                        <span class="text-[11px] font-semibold text-rose-500 mr-1 mb-1">Your Reply</span>
+                        <button onclick="handleReplyClick()"
+                            class="group text-left bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-600 hover:to-rose-700 active:scale-[0.98] text-white px-5 py-3.5 rounded-2xl rounded-br-sm shadow-lg shadow-rose-500/25 transition-all cursor-pointer">
+                            <div class="flex items-center gap-2.5">
+                                <span class="text-base sm:text-lg font-bold tracking-tight">Got it babe</span>
+                                <span class="text-lg">😍</span>
+                                <i class="fa-solid fa-paper-plane text-xs bg-white/20 p-2 rounded-full group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                            </div>
+                            <p class="text-[11px] text-rose-100 mt-1 font-medium">
+                                Tap to reply & pick our date <i class="fa-solid fa-arrow-right ml-1"></i>
+                            </p>
+                        </button>
+                    </div>
+
+                    <div class="relative shrink-0">
+                        <img src="https://i.postimg.cc/gcDQ7vZ4/AIRetouch-20261118-160759573.png"
+                             onerror="this.src='https://placehold.co/120x120/f43f5e/ffffff?text=You'"
+                             alt="Your Avatar"
+                             class="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover ring-3 ring-rose-400 shadow-md bg-rose-50">
+                        <span class="absolute -top-1 -right-1 w-5 h-5 bg-rose-500 text-white rounded-full flex items-center justify-center text-[10px] shadow-xs">
+                            <i class="fa-solid fa-heart"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Secondary Next CTA -->
+            <button onclick="handleReplyClick()"
+                class="w-full py-3.5 px-6 rounded-2xl bg-rose-50 hover:bg-rose-100 text-rose-600 font-bold text-sm flex items-center justify-center gap-2 transition-all active:scale-[0.99]">
+                <span>Reply "Got it babe" & Start</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </section>
+
+        <!-- ==================== SLIDE 2: NEXT WEEK CALENDAR WIDGET ==================== -->
+        <section id="slide-2" class="slide-panel flex-col gap-5">
+            <div class="text-center space-y-1.5">
+                <div class="w-12 h-12 rounded-2xl bg-rose-50 text-rose-500 flex items-center justify-center mx-auto text-xl shadow-xs">
+                    <i class="fa-solid fa-calendar-days"></i>
+                </div>
+                <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight">Pick a Date for Us</h2>
+                <p class="text-sm text-slate-500">Choose any day available <span class="text-rose-600 font-semibold">next week</span></p>
+            </div>
+
+            <!-- Calendar Card -->
+            <div class="soft-card rounded-3xl p-4 sm:p-5 bg-white">
+                <!-- Month Header & Availability Pill -->
+                <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+                    <div>
+                        <h3 id="calendarMonthLabel" class="text-base font-bold text-slate-800">November 2026</h3>
+                        <p id="nextWeekRangeLabel" class="text-xs text-rose-500 font-medium mt-0.5">Next Week Available Slots</p>
+                    </div>
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-600 text-[11px] font-bold">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Next Week Open
+                    </span>
+                </div>
+
+                <!-- Weekday Column Headers -->
+                <div class="grid grid-cols-7 gap-1 text-center mb-2">
+                    <span class="text-[11px] font-bold text-slate-400 uppercase">Mon</span>
+                    <span class="text-[11px] font-bold text-slate-400 uppercase">Tue</span>
+                    <span class="text-[11px] font-bold text-slate-400 uppercase">Wed</span>
+                    <span class="text-[11px] font-bold text-slate-400 uppercase">Thu</span>
+                    <span class="text-[11px] font-bold text-slate-400 uppercase">Fri</span>
+                    <span class="text-[11px] font-bold text-rose-400 uppercase">Sat</span>
+                    <span class="text-[11px] font-bold text-rose-400 uppercase">Sun</span>
+                </div>
+
+                <!-- Dynamic Calendar Grid -->
+                <div id="calendarGrid" class="grid grid-cols-7 gap-1.5">
+                    <!-- Populated via JS -->
+                </div>
+
+                <!-- Legend & Selected Date Feedback -->
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                    <div class="flex items-center gap-3 text-slate-500">
+                        <span class="flex items-center gap-1.5">
+                            <span class="w-2.5 h-2.5 rounded-sm bg-rose-50 border border-rose-300"></span> Available
+                        </span>
+                        <span class="flex items-center gap-1.5">
+                            <span class="w-2.5 h-2.5 rounded-sm bg-slate-100"></span> Unavailable
+                        </span>
+                    </div>
+                    <span id="selectedDateBadge" class="font-bold text-rose-600">Select a day</span>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="flex items-center gap-3">
+                <button onclick="prevSlide()"
+                    class="py-3.5 px-5 rounded-2xl border border-slate-200 hover:bg-slate-50 text-slate-600 font-bold text-sm flex items-center justify-center gap-2 transition-all active:scale-95">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Back</span>
+                </button>
+                <button id="slide2NextBtn" onclick="goToSlide(3)" disabled
+                    class="flex-1 py-3.5 px-6 rounded-2xl bg-gradient-to-r from-rose-500 to-rose-600 disabled:from-slate-200 disabled:to-slate-200 disabled:text-slate-400 disabled:shadow-none text-white font-bold text-sm shadow-lg shadow-rose-500/25 flex items-center justify-center gap-2 transition-all active:scale-[0.98] cursor-pointer disabled:cursor-not-allowed">
+                    <span>Continue</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- ==================== SLIDE 3: PICK PLACES ==================== -->
+        <section id="slide-3" class="slide-panel flex-col gap-5">
+            <div class="text-center space-y-1.5">
+                <div class="w-12 h-12 rounded-2xl bg-rose-50 text-rose-500 flex items-center justify-center mx-auto text-xl shadow-xs">
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight">Where Should We Go?</h2>
+                <p class="text-sm text-slate-500">Pick one or more favorite spots for our date</p>
+            </div>
+
+            <!-- Places List -->
+            <div id="placesContainer" class="space-y-2.5">
+                <!-- Populated cleanly via JS for reliable toggle states -->
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="flex items-center gap-3 pt-1">
+                <button onclick="prevSlide()"
+                    class="py-3.5 px-5 rounded-2xl border border-slate-200 hover:bg-slate-50 text-slate-600 font-bold text-sm flex items-center justify-center gap-2 transition-all active:scale-95">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Back</span>
+                </button>
+                <button id="slide3NextBtn" onclick="goToSlide(4)" disabled
+                    class="flex-1 py-3.5 px-6 rounded-2xl bg-gradient-to-r from-rose-500 to-rose-600 disabled:from-slate-200 disabled:to-slate-200 disabled:text-slate-400 disabled:shadow-none text-white font-bold text-sm shadow-lg shadow-rose-500/25 flex items-center justify-center gap-2 transition-all active:scale-[0.98] cursor-pointer disabled:cursor-not-allowed">
+                    <span>Next</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- ==================== SLIDE 4: SUMMARY & SEND TO PISSU KOLLA ==================== -->
+        <section id="slide-4" class="slide-panel flex-col gap-5">
+            <div class="text-center space-y-1.5">
+                <div class="w-12 h-12 rounded-2xl bg-rose-50 text-rose-500 flex items-center justify-center mx-auto text-xl shadow-xs">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </div>
+                <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight">Send this to Pissu Kolla</h2>
+                <p class="text-sm text-slate-500">Review our date plan & share it on WhatsApp</p>
+            </div>
+
+            <!-- Romantic Date Ticket Summary Card -->
+            <div class="soft-card rounded-3xl p-5 sm:p-6 bg-white relative overflow-hidden">
+                <!-- Top Mini Avatars Badge -->
+                <div class="flex items-center justify-center mb-5">
+                    <div class="flex items-center -space-x-3 bg-rose-50/90 px-4 py-2 rounded-full border border-rose-100">
+                        <img src="https://i.postimg.cc/8z850QWC/AIRetouch-20261118-160545159.png"
+                             onerror="this.src='https://placehold.co/80x80/ffe4e6/e11d48?text=Him'"
+                             alt="Pissu Kolla"
+                             class="w-11 h-11 rounded-full object-cover ring-2 ring-white shadow-xs">
+                        <span class="w-7 h-7 rounded-full bg-rose-500 text-white flex items-center justify-center text-xs z-10 ring-2 ring-white shadow-xs">
+                            <i class="fa-solid fa-heart heart-pulse"></i>
+                        </span>
+                        <img src="https://i.postimg.cc/gcDQ7vZ4/AIRetouch-20261118-160759573.png"
+                             onerror="this.src='https://placehold.co/80x80/f43f5e/ffffff?text=You'"
+                             alt="You"
+                             class="w-11 h-11 rounded-full object-cover ring-2 ring-white shadow-xs">
+                    </div>
+                </div>
+
+                <!-- Summary Items -->
+                <div class="space-y-3.5">
+                    <!-- Reply Confirmation -->
+                    <div class="flex items-center gap-3.5 p-3.5 rounded-2xl bg-rose-50/60 border border-rose-100/80">
+                        <div class="w-10 h-10 rounded-xl bg-white text-rose-500 flex items-center justify-center shrink-0 shadow-2xs">
+                            <i class="fa-solid fa-comment-heart text-base"></i>
+                        </div>
+                        <div>
+                            <p class="text-[11px] font-bold uppercase tracking-wider text-rose-400">Your Answer</p>
+                            <p class="text-sm font-bold text-slate-800">"Got it babe 😍"</p>
+                        </div>
+                    </div>
+
+                    <!-- Chosen Date -->
+                    <div class="flex items-center gap-3.5 p-3.5 rounded-2xl bg-slate-50/80 border border-slate-100">
+                        <div class="w-10 h-10 rounded-xl bg-white text-rose-500 flex items-center justify-center shrink-0 shadow-2xs">
+                            <i class="fa-solid fa-calendar-check text-base"></i>
+                        </div>
+                        <div>
+                            <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Date Chosen (Next Week)</p>
+                            <p id="summaryDateText" class="text-sm font-bold text-slate-800">Not selected yet</p>
+                        </div>
+                    </div>
+
+                    <!-- Chosen Places -->
+                    <div class="flex items-start gap-3.5 p-3.5 rounded-2xl bg-slate-50/80 border border-slate-100">
+                        <div class="w-10 h-10 rounded-xl bg-white text-rose-500 flex items-center justify-center shrink-0 shadow-2xs mt-0.5">
+                            <i class="fa-solid fa-map-location-dot text-base"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">Selected Places</p>
+                            <div id="summaryPlacesList" class="flex flex-wrap gap-1.5">
+                                <!-- Pills injected here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Primary WhatsApp Share Button -->
+            <div class="space-y-2.5">
+                <button onclick="shareOnWhatsApp()"
+                    class="w-full py-4 px-6 rounded-2xl bg-[#25D366] hover:bg-[#20bd5a] active:scale-[0.98] text-white font-extrabold text-base shadow-lg shadow-[#25D366]/30 flex items-center justify-center gap-3 transition-all cursor-pointer">
+                    <i class="fa-brands fa-whatsapp text-2xl"></i>
+                    <span>Send to Pissu Kolla on WhatsApp</span>
+                </button>
+
+                <div class="flex items-center gap-2.5">
+                    <button onclick="prevSlide()"
+                        class="flex-1 py-3 px-4 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-600 font-semibold text-xs flex items-center justify-center gap-1.5 transition-all">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span>Edit Choices</span>
+                    </button>
+                    <button onclick="copySummaryMessage()"
+                        class="flex-1 py-3 px-4 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-600 font-semibold text-xs flex items-center justify-center gap-1.5 transition-all">
+                        <i class="fa-regular fa-copy"></i>
+                        <span id="copyBtnLabel">Copy Message</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Toast Notification (Custom non-alert feedback) -->
+    <div id="toastMessage"
+        class="fixed bottom-16 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 translate-y-2 transition-all duration-300 bg-slate-900 text-white text-xs font-semibold px-4 py-2.5 rounded-full shadow-lg flex items-center gap-2">
+        <i class="fa-solid fa-circle-check text-emerald-400"></i>
+        <span id="toastText">Copied to clipboard!</span>
+    </div>
+
+    <!-- Clean White Footer -->
+    <footer class="w-full bg-white border-t border-rose-100/70 py-4 px-4 text-center">
+        <p class="text-sm font-bold text-slate-700 tracking-wide flex items-center justify-center gap-1.5">
+            <span>Your Pissu Kollaah</span>
+            <i class="fa-solid fa-heart text-rose-500 heart-pulse"></i>
+        </p>
+    </footer>
+
+    <script>
+        // Application State
+        const state = {
+            currentSlide: 1,
+            replyText: "Got it babe 😍",
+            selectedDate: null,      // Date object
+            selectedDateFormatted: "",
+            selectedPlaces: []       // Array of place IDs
+        };
+
+        // Specific 5 Places requested
+        const PLACES_DATA = [
+            {
+                id: 'dalada-maligawa',
+                name: 'Dlda Mligw',
+                subtitle: 'Sri Dalada Maligawa • Peaceful & Blessed',
+                icon: 'fa-solid fa-gopuram'
+            },
+            {
+                id: 'peradeniya-garden',
+                name: 'Peradeniya Garden',
+                subtitle: 'Royal Botanic Gardens • Romantic Walk',
+                icon: 'fa-solid fa-leaf'
+            },
+            {
+                id: 'kfc',
+                name: 'KFC',
+                subtitle: 'Crispy Treats & Quick Bites Together',
+                icon: 'fa-solid fa-drumstick-bite'
+            },
+            {
+                id: 'kcc',
+                name: 'KCC',
+                subtitle: 'Kandy City Centre • Shopping & Hangout',
+                icon: 'fa-solid fa-bag-shopping'
+            },
+            {
+                id: 'view-point',
+                name: 'View Point',
+                subtitle: 'Kandy View Point • Scenic City & Sunset',
+                icon: 'fa-solid fa-mountain-sun'
+            }
+        ];
+
+        // Initialize App on Load
+        document.addEventListener('DOMContentLoaded', () => {
+            initNextWeekCalendar();
+            renderPlacesList();
+        });
+
+        // Slide Navigation Controller
+        function goToSlide(slideNumber) {
+            if (slideNumber < 1 || slideNumber > 4) return;
+
+            // Hide current slide
+            const currentEl = document.getElementById(`slide-${state.currentSlide}`);
+            if (currentEl) {
+                currentEl.classList.remove('visible');
+                setTimeout(() => {
+                    currentEl.classList.remove('active');
+                    showTargetSlide(slideNumber);
+                }, 180);
+            } else {
+                showTargetSlide(slideNumber);
+            }
+        }
+
+        function showTargetSlide(slideNumber) {
+            state.currentSlide = slideNumber;
+            const targetEl = document.getElementById(`slide-${slideNumber}`);
+            if (targetEl) {
+                targetEl.classList.add('active');
+                requestAnimationFrame(() => {
+                    targetEl.classList.add('visible');
+                });
+            }
+
+            // Update Progress Bar & Header Back Button
+            document.getElementById('stepLabel').textContent = `Step ${slideNumber} of 4`;
+            const backBtn = document.getElementById('headerBackBtn');
+            if (slideNumber > 1) {
+                backBtn.classList.remove('hidden');
+            } else {
+                backBtn.classList.add('hidden');
+            }
+
+            for (let i = 1; i <= 4; i++) {
+                const dot = document.getElementById(`dot-${i}`);
+                if (i <= slideNumber) {
+                    dot.classList.remove('bg-rose-100');
+                    dot.classList.add('bg-rose-500');
+                } else {
+                    dot.classList.remove('bg-rose-500');
+                    dot.classList.add('bg-rose-100');
+                }
+            }
+
+            if (slideNumber === 4) {
+                populateSummarySlide();
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function prevSlide() {
+            if (state.currentSlide > 1) {
+                goToSlide(state.currentSlide - 1);
+            }
+        }
+
+        // Slide 1 Action
+        function handleReplyClick() {
+            goToSlide(2);
+        }
+
+        // Slide 2: Next Week Calendar Generator
+        function initNextWeekCalendar() {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            // Calculate upcoming Monday (Next Week Monday)
+            // JS getDay(): 0 = Sun, 1 = Mon, ..., 6 = Sat
+            const dayOfWeek = today.getDay();
+            const daysUntilNextMonday = dayOfWeek === 0 ? 1 : (8 - dayOfWeek);
+
+            const nextMonday = new Date(today);
+            nextMonday.setDate(today.getDate() + daysUntilNextMonday);
+
+            const nextSunday = new Date(nextMonday);
+            nextSunday.setDate(nextMonday.getDate() + 6);
+
+            // Start calendar grid on the Monday of the current week so user sees context (This Week disabled, Next Week highlighted)
+            const currentWeekMonday = new Date(nextMonday);
+            currentWeekMonday.setDate(nextMonday.getDate() - 7);
+
+            // Show 3 weeks total (Current Week, Next Week [Active], Following Week [Disabled])
+            const totalDaysToRender = 21;
+
+            // Update Month & Range Header Labels
+            const monthFormatter = new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' });
+            const shortDateFormatter = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric' });
+
+            const startMonth = monthFormatter.format(nextMonday);
+            const endMonth = monthFormatter.format(nextSunday);
+            document.getElementById('calendarMonthLabel').textContent =
+                startMonth === endMonth ? startMonth : `${shortDateFormatter.format(nextMonday)} - ${shortDateFormatter.format(nextSunday)}`;
+
+            document.getElementById('nextWeekRangeLabel').textContent =
+                `Available: ${shortDateFormatter.format(nextMonday)} – ${shortDateFormatter.format(nextSunday)}`;
+
+            const gridEl = document.getElementById('calendarGrid');
+            gridEl.innerHTML = '';
+
+            for (let i = 0; i < totalDaysToRender; i++) {
+                const cellDate = new Date(currentWeekMonday);
+                cellDate.setDate(currentWeekMonday.getDate() + i);
+
+                const isNextWeek = cellDate >= nextMonday && cellDate <= nextSunday;
+                const isToday = cellDate.getTime() === today.getTime();
+
+                const btn = document.createElement('button');
+                btn.type = 'button';
+
+                const dayNum = cellDate.getDate();
+                const shortMonth = cellDate.toLocaleDateString('en-US', { month: 'short' });
+
+                if (isNextWeek) {
+                    btn.className = `calendar-day-btn relative flex flex-col items-center justify-center py-2.5 px-1 rounded-xl border-2 border-rose-200 bg-rose-50/60 hover:bg-rose-100/80 hover:border-rose-400 text-slate-800 transition-all cursor-pointer active:scale-95`;
+                    btn.innerHTML = `
+                        <span class="text-[9px] font-bold uppercase tracking-tighter text-rose-500">${shortMonth}</span>
+                        <span class="text-sm sm:text-base font-extrabold leading-tight">${dayNum}</span>
+                        <span class="w-1.5 h-1.5 rounded-full bg-rose-400 mt-0.5"></span>
+                    `;
+                    btn.addEventListener('click', () => selectCalendarDate(cellDate, btn));
+                } else {
+                    btn.disabled = true;
+                    btn.className = `flex flex-col items-center justify-center py-2.5 px-1 rounded-xl border border-transparent bg-slate-50/70 text-slate-300 cursor-not-allowed select-none`;
+                    btn.innerHTML = `
+                        <span class="text-[9px] font-medium uppercase">${isToday ? 'Today' : shortMonth}</span>
+                        <span class="text-sm font-semibold leading-tight">${dayNum}</span>
+                        <span class="w-1.5 h-1.5 rounded-full bg-transparent mt-0.5"></span>
+                    `;
+                }
+
+                gridEl.appendChild(btn);
+            }
+        }
+
+        function selectCalendarDate(dateObj, clickedBtn) {
+            state.selectedDate = dateObj;
+            state.selectedDateFormatted = dateObj.toLocaleDateString('en-US', {
+                weekday: 'long',
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric'
+            });
+
+            // Reset styling on all active next-week buttons
+            document.querySelectorAll('.calendar-day-btn').forEach(btn => {
+                btn.className = `calendar-day-btn relative flex flex-col items-center justify-center py-2.5 px-1 rounded-xl border-2 border-rose-200 bg-rose-50/60 hover:bg-rose-100/80 hover:border-rose-400 text-slate-800 transition-all cursor-pointer active:scale-95`;
+                const spans = btn.querySelectorAll('span');
+                if (spans[0]) spans[0].className = 'text-[9px] font-bold uppercase tracking-tighter text-rose-500';
+                if (spans[2]) spans[2].className = 'w-1.5 h-1.5 rounded-full bg-rose-400 mt-0.5';
+            });
+
+            // Apply selected romantic gradient style
+            clickedBtn.className = `calendar-day-btn relative flex flex-col items-center justify-center py-2.5 px-1 rounded-xl border-2 border-rose-600 bg-gradient-to-br from-rose-500 to-rose-600 text-white shadow-md shadow-rose-500/30 scale-105 transition-all cursor-pointer`;
+            const activeSpans = clickedBtn.querySelectorAll('span');
+            if (activeSpans[0]) activeSpans[0].className = 'text-[9px] font-bold uppercase tracking-tighter text-rose-100';
+            if (activeSpans[2]) activeSpans[2].className = 'w-1.5 h-1.5 rounded-full bg-white mt-0.5';
+
+            // Update badge & enable Continue button
+            const shortDisplay = dateObj.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+            document.getElementById('selectedDateBadge').innerHTML = `<i class="fa-solid fa-heart mr-1"></i>${shortDisplay}`;
+            document.getElementById('slide2NextBtn').disabled = false;
+        }
+
+        // Slide 3: Render & Toggle Places
+        function renderPlacesList() {
+            const container = document.getElementById('placesContainer');
+            container.innerHTML = '';
+
+            PLACES_DATA.forEach(place => {
+                const isSelected = state.selectedPlaces.includes(place.id);
+                const card = document.createElement('button');
+                card.type = 'button';
+                card.onclick = () => togglePlaceSelection(place.id);
+
+                card.className = isSelected
+                    ? `w-full text-left p-3.5 sm:p-4 rounded-2xl border-2 border-rose-500 bg-rose-50/70 shadow-sm flex items-center justify-between gap-3 transition-all active:scale-[0.99] cursor-pointer`
+                    : `w-full text-left p-3.5 sm:p-4 rounded-2xl border border-slate-200/90 hover:border-rose-300 bg-white hover:bg-rose-50/20 flex items-center justify-between gap-3 transition-all active:scale-[0.99] cursor-pointer`;
+
+                card.innerHTML = `
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-11 h-11 rounded-xl ${isSelected ? 'bg-rose-500 text-white shadow-sm' : 'bg-rose-50 text-rose-500'} flex items-center justify-center text-lg shrink-0 transition-colors">
+                            <i class="${place.icon}"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-base font-bold ${isSelected ? 'text-rose-700' : 'text-slate-800'}">${place.name}</h3>
+                            <p class="text-xs text-slate-500 mt-0.5">${place.subtitle}</p>
+                        </div>
+                    </div>
+                    <div class="shrink-0 text-xl ${isSelected ? 'text-rose-500 scale-110' : 'text-slate-200'} transition-all">
+                        <i class="${isSelected ? 'fa-solid fa-circle-check' : 'fa-regular fa-circle'}"></i>
+                    </div>
+                `;
+
+                container.appendChild(card);
+            });
+
+            document.getElementById('slide3NextBtn').disabled = state.selectedPlaces.length === 0;
+        }
+
+        function togglePlaceSelection(placeId) {
+            const idx = state.selectedPlaces.indexOf(placeId);
+            if (idx > -1) {
+                state.selectedPlaces.splice(idx, 1);
+            } else {
+                state.selectedPlaces.push(placeId);
+            }
+            renderPlacesList();
+        }
+
+        // Slide 4: Summary & WhatsApp Share
+        function getSelectedPlaceObjects() {
+            return PLACES_DATA.filter(p => state.selectedPlaces.includes(p.id));
+        }
+
+        function populateSummarySlide() {
+            document.getElementById('summaryDateText').textContent =
+                state.selectedDateFormatted || 'Next Week';
+
+            const placesListEl = document.getElementById('summaryPlacesList');
+            placesListEl.innerHTML = '';
+
+            const selectedObjs = getSelectedPlaceObjects();
+            selectedObjs.forEach(place => {
+                const badge = document.createElement('span');
+                badge.className = 'inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-bold';
+                badge.innerHTML = `<i class="${place.icon} text-rose-500"></i> ${place.name}`;
+                placesListEl.appendChild(badge);
+            });
+        }
+
+        function buildWhatsAppMessage() {
+            const selectedObjs = getSelectedPlaceObjects();
+            const placesFormatted = selectedObjs.map(p => `• ${p.name}`).join('\n');
+
+            return `Hii Pissu Kolla! ❤️\n\n` +
+                   `My Reply: *${state.replyText}*\n\n` +
+                   `📅 *Date:* ${state.selectedDateFormatted}\n` +
+                   `📍 *Places I picked for us:*\n${placesFormatted}\n\n` +
+                   `Can't wait for our date! 💕`;
+        }
+
+        function shareOnWhatsApp() {
+            const message = buildWhatsAppMessage();
+            const encodedText = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/?text=${encodedText}`;
+            window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+        }
+
+        function copySummaryMessage() {
+            const message = buildWhatsAppMessage();
+            const tempTextarea = document.createElement('textarea');
+            tempTextarea.value = message;
+            tempTextarea.style.position = 'fixed';
+            tempTextarea.style.opacity = '0';
+            document.body.appendChild(tempTextarea);
+            tempTextarea.select();
+
+            try {
+                document.execCommand('copy');
+                showToast('Date message copied for Pissu Kolla!');
+                const label = document.getElementById('copyBtnLabel');
+                label.textContent = 'Copied!';
+                setTimeout(() => { label.textContent = 'Copy Message'; }, 2000);
+            } catch (err) {
+                showToast('Unable to copy automatically');
+            } finally {
+                document.body.removeChild(tempTextarea);
+            }
+        }
+
+        function showToast(text) {
+            const toast = document.getElementById('toastMessage');
+            document.getElementById('toastText').textContent = text;
+            toast.classList.remove('opacity-0', 'translate-y-2');
+            toast.classList.add('opacity-100', 'translate-y-0');
+
+            setTimeout(() => {
+                toast.classList.remove('opacity-100', 'translate-y-0');
+                toast.classList.add('opacity-0', 'translate-y-2');
+            }, 2400);
+        }
+    </script>
+</body>
+</html>
